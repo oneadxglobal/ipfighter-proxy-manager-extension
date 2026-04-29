@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPFighter Proxy Manager - Settings</title>
+  <script src="theme-init.js"></script>
+  <link rel="stylesheet" href="options.css">
+
+</head>
+
+<body>
+  <div class="app">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon-wrap">
+          <img id="logoImg" src="../../icons/ic-logo-dark.png" width="32" height="auto" alt="">
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">IPFighter</span>
+          <span class="logo-sub">Proxy Manager</span>
+        </div>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item active" data-tab="proxies">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="2" width="6" height="5" rx="1" />
+            <rect x="2" y="17" width="6" height="5" rx="1" />
+            <rect x="16" y="17" width="6" height="5" rx="1" />
+            <line x1="12" y1="7" x2="12" y2="13" />
+            <line x1="5" y1="13" x2="19" y2="13" />
+            <line x1="5" y1="13" x2="5" y2="17" />
+            <line x1="19" y1="13" x2="19" y2="17" />
+          </svg>
+          <span>Proxy Manager</span>
+        </li>
+        <li class="nav-item" data-tab="rules">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="3" width="14" height="18" rx="2" />
+            <path d="M9 3a3 3 0 006 0" />
+            <polyline points="9 12 11 14 15 10" />
+          </svg>
+          <span>Smart Rules</span>
+        </li>
+        <li class="nav-item" data-tab="privacy">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <rect x="9" y="12" width="6" height="5" rx="1" />
+            <path d="M10 12v-2a2 2 0 014 0v2" />
+          </svg>
+          <span>Advanced Protection</span>
+        </li>
+        <li class="nav-item" data-tab="about">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="8" r="0.5" fill="currentColor" />
+            <line x1="12" y1="11" x2="12" y2="16" />
+          </svg>
+          <span>About Us</span>
+        </li>
+      </ul>
+      <div class="theme-toggle">
+        <button class="theme-btn active" id="btnThemeLight">
+          <img src="../../icons/ic-light.png.png" width="16" height="16" alt=""> Light
+        </button>
+        <button class="theme-btn" id="btnThemeDark">
+          <img src="../../icons/ic-dark.png.png" width="16" height="16" alt="">
+          Dark
+        </button>
+      </div>
+    </nav>
+
+    <main class="main-content">
+
+      <section class="tab-content active" id="tab-proxies">
+        <div class="content-header">
+          <div class="header-title-group">
+            <h1>Proxy Manager</h1>
+            <p class="header-subtitle">Manage and organize your proxy list</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btnImportOpt">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <p>Import</p>
+            </button>
+            <input type="file" id="importFileInput" accept=".csv,.json,.xlsx" style="display:none;">
+            <button class="btn btn-secondary" id="btnExport">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+              <p>Export</p>
+            </button>
+            <button class="btn btn-primary" id="btnAddProxyOpt">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              <p>Add New Proxy</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="filter-bar">
+            <div class="filter-group filter-search">
+              <label class="filter-label">SEARCH</label>
+              <div class="search-input-wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="text" class="input filter-input" id="filterSearch" placeholder="Search Proxy, Note, IP...">
+              </div>
+            </div>
+            <!-- <div class="filter-group">
+              <label class="filter-label">TYPE</label>
+              <div class="custom-select" id="filterType" data-value="http">
+                <div class="custom-select-trigger">
+                  <span class="custom-select-label">HTTP</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+                <div class="custom-select-dropdown">
+                   <div class="custom-select-option" data-value="">All Types</div> -->
+            <!-- <div class="custom-select-option" data-value="http">HTTP</div> -->
+            <!-- <div class="custom-select-option" data-value="https">HTTPS</div> -->
+            <!-- <div class="custom-select-option" data-value="socks5">SOCKS5</div> -->
+            <!-- <div class="custom-select-option" data-value="socks4">SOCKS4</div> -->
+            <!-- </div>
+              </div>
+            </div> -->
+            <div class="filter-group">
+              <label class="filter-label">STATUS</label>
+              <div class="custom-select" id="filterStatus" data-value="">
+                <div class="custom-select-trigger">
+                  <span class="custom-select-label">All Status</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+                <div class="custom-select-dropdown">
+                  <div class="custom-select-option selected" data-value="">All Status</div>
+                  <div class="custom-select-option" data-value="active">Active</div>
+                  <div class="custom-select-option" data-value="inactive">Error</div>
+                </div>
+              </div>
+            </div>
+            <div class="filter-group">
+              <label class="filter-label">TAG</label>
+              <div class="tag-filter-wrap" id="tagFilterWrap">
+                <div class="tag-filter-trigger custom-select-trigger" id="tagFilterTrigger">
+                  <span id="tagFilterLabel">All Tags</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+                <div class="tag-filter-dropdown" id="tagFilterDropdown" style="display:none;">
+                  <div class="tag-filter-list" id="tagFilterList"></div>
+                  <div class="tag-filter-footer">
+                    <button class="drp-btn-cancel" id="tagFilterCancel">Cancel</button>
+                    <button class="drp-btn-apply" id="tagFilterApply">Apply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="filter-group filter-date">
+              <label class="filter-label">EXPIRY DATE</label>
+              <div class="date-range-wrap">
+                <div class="daterange-input" id="dateRangeInput">
+                  <span id="dateRangeText">mm/dd/yyyy — mm/dd/yyyy</span>
+                  <svg class="ic-lich" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <div class="daterange-popup" id="dateRangePopup" style="display:none;">
+                  <div class="drp-header">
+                    <div class="drp-from">
+                      <div class="drp-label">From</div>
+                      <div class="drp-value" id="drpFromVal">—</div>
+                    </div>
+                    <div class="drp-to">
+                      <div class="drp-label">To</div>
+                      <div class="drp-value" id="drpToVal">—</div>
+                    </div>
+                  </div>
+                  <div class="drp-nav">
+                    <button class="drp-nav-btn" id="drpPrevMonth">&#8249;</button>
+                    <span class="drp-month-label" id="drpMonthLabel"></span>
+                    <button class="drp-nav-btn" id="drpNextMonth">&#8250;</button>
+                  </div>
+                  <div class="drp-weekdays">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="drp-days" id="drpDays"></div>
+                  <div class="drp-footer">
+                    <button class="drp-btn-cancel" id="drpCancel">Clear</button>
+                    <button class="drp-btn-apply" id="drpApply">Apply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <div class="table-wrap">
+              <table class="table">
+                <colgroup>
+                  <col class="col-check">
+                  <col class="col-type">
+                  <col class="col-proxy">
+                  <col class="col-status">
+                  <col class="col-ip">
+                  <col class="col-location">
+                  <col class="col-tag">
+                  <col class="col-note">
+                  <col class="col-expires">
+                  <col class="col-createdate">
+                  <col class="col-more">
+                </colgroup>
+                <!-- Thay toàn bộ <thead> cũ -->
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="checkAll" class="row-checkbox"></th>
+                    <th class="th-sortable" data-sort="type">
+                      Type
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th class="th-sortable" data-sort="host">
+                      Proxy
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th class="th-sortable" data-sort="status">
+                      Status
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th class="th-sortable" data-sort="ip">
+                      IP
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th class="th-sortable" data-sort="location">
+                      Location
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th>Tag</th>
+                    <th>Note</th>
+                    <th class="th-sortable" data-sort="expires">
+                      Expires
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th class="th-sortable" data-sort="createdAt">
+                      Create Date
+                      <span class="sort-icons">
+                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="4,0 8,5 0,5" />
+                        </svg>
+                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                          <polygon points="0,0 8,0 4,5" />
+                        </svg>
+                      </span>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="proxyTableBody"></tbody>
+              </table>
+            </div>
+            <div class="table-bottom-bar">
+              <div class="bulk-action-bar" id="bulkActionBar" style="display:none;">
+                <!-- <span class="bulk-action-info"><span id="bulkSelectedCount">0</span> selected</span> -->
+                <div class="bulk-action-btns">
+                  <button class="bulk-btn" id="bulkBtnCheck">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Check proxy
+                  </button>
+                  <button class="bulk-btn" id="bulkBtnEdit">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    Edit
+                  </button>
+                  <button class="bulk-btn" id="bulkBtnCopy">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" />
+                      <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                    </svg>
+                    Copy
+                  </button>
+                  <button class="bulk-btn danger" id="bulkBtnDelete">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+                      <path d="M10 11v6M14 11v6" />
+                      <path d="M9 6V4h6v2" />
+                    </svg>
+                    Delete
+                  </button>
+                </div>
+              </div>
+              <div class="pagination-wrap" id="proxyPagination"></div>
+            </div>
+          </div>
+      </section>
+
+      <section class="tab-content" id="tab-rules">
+        <div class="content-header">
+          <div class="header-title-group">
+            <h1>Smart Rules</h1>
+            <p class="header-subtitle">Route specific domains through different proxies</p>
+          </div>
+          <!-- <div class="header-actions">
+            <button class="btn btn-secondary" id="btnPresetRules">Load Presets</button>
+            <button class="btn btn-primary" id="btnAddRule">+ Add Rule</button>
+          </div> -->
+        </div>
+
+        <div class="tab-switcher" style="margin-bottom:16px;">
+          <button class="tab-switch-btn active" id="btnTabBypass">✓ Bypass List (Recommended)</button>
+          <button class="tab-switch-btn" id="btnTabDefault">Default</button>
+        </div>
+        <p id="tabSwitchDesc" style="font-size:14px;color:var(--text-muted);margin-bottom:16px;margin-left:18px;">Bypass
+          specific domains
+        </p>
+
+        <div class="card" id="panelBypass">
+          <div class="setting-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h3 style="font-size:17px;font-weight:600;">Bypass Domain List</h3>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn btn-import" id="btnAutoFillBypass">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  Auto Fill
+                </button>
+                <button class="btn btn-import" id="btnImportBypass">
+                  <img class="ic-import" src="../../icons/ic-import-dark.png" width="16" height="16" alt="">
+                  Import File
+                </button>
+                <input type="file" id="bypassFileInput" accept=".txt" style="display:none;">
+              </div>
+            </div>
+            <textarea id="bypassList" class="input textarea" rows="10"
+              placeholder="Enter the list of domain"></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+              <p style="font-size:15px;color:var(--text-muted);">Support regex, wildcard, CIDR range, conditional
+                combination
+                (domain + port + method)</p>
+              <button class="btn btn-primary" id="btnSaveBypass">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                  <polyline points="17 21 17 13 7 13 7 21" />
+                </svg>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="panelDefault" style="display:none;">
+          <div class="setting-card">
+            <p style="font-size:13px;color:var(--text-muted);text-align:center;padding:40px 0;">Apply for All</p>
+          </div>
+        </div>
+
+        <div class="card" style="display:none;">
+          <div id="rulesList" class="rules-list"></div>
+        </div>
+      </section>
+
+      <section class="tab-content" id="tab-privacy">
+        <div class="content-header">
+          <div class="header-title-group">
+            <h1>Advanced Protection</h1>
+            <p class="header-subtitle">Protect your identity and prevent leaks</p>
+          </div>
+        </div>
+        <div class="cards-grid">
+
+          <div class="card setting-card">
+            <div class="setting-header">
+              <div class="setting-icon">
+                <img class="ic-webrtc" src="../../icons/ic-webRTC-dark.png" width="24" height="auto" alt="">
+              </div>
+              <div class="setting-info">
+                <h3>Disable WebRTC Leak</h3>
+                <p>Prevents WebRTC from exposing your real IP address even when using a proxy.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="settWebrtc">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- <div class="card setting-card">
+            <div class="setting-header">
+              <div class="setting-icon">
+                <img class="ic-dns" src="../../icons/ic-dns-dark.png" width="24" height="auto" alt="">
+              </div>
+              <div class="setting-info">
+                <h3>DNS Prefetch</h3>
+                <p>Stops the browser from resolving domain names before you click on a link to enhance privacy.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="settDns" disabled>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div> -->
+
+          <div class="card setting-card">
+            <div class="setting-header">
+              <div class="setting-icon">
+                <img class="ic-timezone" src="../../icons/ic-timezone-dark.png" width="22" height="22" alt="">
+              </div>
+              <div class="setting-info">
+                <h3>Fake Timezone <span class="badge-sync">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 2v6h-6" />
+                      <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                      <path d="M3 22v-6h6" />
+                      <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                    </svg>
+                    Sync with proxy
+                  </span></h3>
+                <p>Spoofs your browser timezone to match the proxy server's location.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="settTimezone">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card setting-card">
+            <div class="setting-header">
+              <div class="setting-icon">
+                <img class="ic-language" src="../../icons/ic-language-dark.png" width="22" height="22" alt="">
+              </div>
+              <div class="setting-info">
+                <h3>Fake Language <span class="badge-sync">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 2v6h-6" />
+                      <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                      <path d="M3 22v-6h6" />
+                      <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                    </svg>
+                    Sync with proxy
+                  </span></h3>
+                <p>Sets browser language to match the proxy server's region.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="settLanguage">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card setting-card">
+            <div class="setting-header">
+              <div class="setting-icon">
+                <img class="ic-location" src="../../icons/ic-location-dark.png" width="22" height="22" alt="">
+              </div>
+              <div class="setting-info">
+                <h3>Fake Location <span class="badge-sync">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 2v6h-6" />
+                      <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                      <path d="M3 22v-6h6" />
+                      <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                    </svg>
+                    Sync with proxy
+                  </span></h3>
+                <p>Returns proxy server coordinates when websites request your geolocation.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="settLocation">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="tab-content" id="tab-about">
+        <div class="content-header">
+          <div class="header-title-group">
+            <h1>About Us</h1>
+            <p class="header-subtitle">Engineering the future of secure, high-speed proxy management through <br>
+              intelligent routing and architectural precision.</p>
+          </div>
+        </div>
+        <div class="about-outer">
+          <div class="about-card">
+            <h2 class="about-title">IPFighter Proxy Manager</h2>
+            <p class="about-desc">Professional proxy management extension with smart routing rules, advanced privacy
+              protection and seamless multi-proxy support.</p>
+            <div class="about-features">
+              <div class="feature-item">
+                <span class="feature-icon-wrap" style="background:rgba(234, 179, 8, 0.1);">
+                  <img src="../../icons/ic-about-lock.png" width="auto" height="20" alt="">
+                </span>
+                <span>HTTP & SOCKS5 Proxy with Auth</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon-wrap" style="background:rgba(244, 114, 182, 0.1);">
+                  <img src="../../icons/ic-about-rule.png" width="auto" height="20" alt="">
+                </span>
+                <span>Smart Rule Engine (Regex, Wildcard, CIDR)</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon-wrap" style="background:rgba(34, 197, 94, 0.1);">
+                  <img src="../../icons/ic-about-webrtc.png" width="auto" height="20" alt="">
+                </span>
+                <span>WebRTC Leak Protection</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon-wrap" style="background:rgba(59, 130, 246, 0.1);">
+                  <img src="../../icons/ic-about-globe.png" width="auto" height="20" alt="">
+                </span>
+                <span>Timezone, Language & Location Spoofing</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon-wrap" style="background:rgba(251, 146, 60, 0.1);">
+                  <img src="../../icons/ic-about-chrome.png" width="auto" height="20" alt="">
+                </span>
+                <span>Chrome MV3 & Firefox Compatible</span>
+              </div>
+            </div>
+            <div style="margin-top:36px;">
+              <a href="https://ipfighter.com" target="_blank" class="btn btn-about-cta" style="text-decoration:none;">
+                Go check IPFighter →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="modal" id="proxyModal" style="display:none;">
+    <div class="modal-overlay" id="proxyModalOverlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div id="proxyModalIconWrap"
+            style="width:36px;height:36px;background:rgba(47,215,240,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+          </div>
+          <h2 id="proxyModalTitle">ADD NEW PROXY</h2>
+        </div>
+        <button class="btn-close" id="btnCloseProxyModal">✕</button>
+      </div>
+
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:16px;overflow:visible;">
+        <input type="hidden" id="optProxyId">
+
+        <div style="display:flex;gap:16px;">
+          <div class="form-group" style="flex:1;">
+            <label class="filter-label label-with-icon">
+              TYPE
+              <span class="info-icon-wrap">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <circle cx="12" cy="8" r="1" />
+                </svg>
+
+                <span class="tooltip-text">
+                  Chrome is allowed to use the specified HTTP proxy
+                </span>
+              </span>
+            </label>
+            <div class="custom-select custom-select-dark" id="optProxyType" data-value="http">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">HTTP</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option selected" data-value="http">HTTP</div>
+                <!-- <div class="custom-select-option" data-value="https">HTTPS</div> -->
+                <!-- <div class="custom-select-option" data-value="socks5">SOCKS5</div> -->
+                <!-- <div class="custom-select-option" data-value="socks4">SOCKS4</div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="flex:2;">
+            <label class="filter-label">INPUT FORMAT <span style="color:var(--danger)">*</span></label>
+            <div class="custom-select custom-select-dark" id="optProxyInputFormat" data-value="host:port:user:pass">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">host:port:username:pass</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option selected" data-value="host:port:user:pass">host:port:username:pass
+                </div>
+                <div class="custom-select-option" data-value="host:port@user:pass">host:port@username:pass</div>
+                <div class="custom-select-option" data-value="user:pass:host:port">username:pass:host:port</div>
+                <div class="custom-select-option" data-value="user@pass:host:port">username@pass:host:port</div>
+                <div class="custom-select-option" data-value="host:port">host:port</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="filter-label" id="proxyBulkLabel">ADD THE PROXIES HERE <span
+              style="color:var(--danger)">*</span></label>
+          <div class="proxy-textarea-wrap" id="proxyTextareaWrap">
+            <div class="proxy-validate-msg" id="proxyValidateMsg" style="display:none;"></div>
+            <textarea id="optProxyBulk" class="input textarea input-dark" placeholder="Enter your proxy here" rows="5"
+              autocomplete="off" spellcheck="false"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group" style="width:100%;">
+
+          <label class="filter-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="margin-right:4px;vertical-align:middle;">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            EXPIRED DATE
+          </label>
+          <div class="single-date-wrap" id="singleDateWrap">
+            <div class="daterange-input input-dark" id="singleDateInput">
+              <span id="singleDateText">mm/dd/yyyy</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </div>
+            <div class="daterange-popup" id="singleDatePopup" style="display:none;">
+              <div class="drp-nav">
+                <button class="drp-nav-btn" id="sdPrevMonth">&#8249;</button>
+                <span class="drp-month-label" id="sdMonthLabel"></span>
+                <button class="drp-nav-btn" id="sdNextMonth">&#8250;</button>
+              </div>
+              <div class="drp-weekdays">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="drp-days" id="sdDays"></div>
+              <div class="drp-footer">
+                <button class="drp-btn-cancel" id="sdCancel">Cancel</button>
+                <button class="drp-btn-apply" id="sdApply">Apply</button>
+              </div>
+            </div>
+            <input type="hidden" id="optProxyExpires">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="filter-label">TAG</label>
+          <div class="tag-wrap">
+            <!-- Input search -->
+            <div class="tag-search-row">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input type="text" id="tagSearchInput" class="tag-search-input" placeholder="Search or create tags">
+            </div>
+
+            <!-- Selected badges -->
+            <div class="tag-selected-list" id="tagSelectedList"></div>
+
+            <!-- Panel cố định -->
+            <div class="tag-panel" id="tagPanel">
+              <!-- Create row -->
+              <div class="tag-create-row" id="tagCreateRow" style="display:none;">
+                <div style="display:flex;align-items:center;gap:8px;flex:1;">
+                  <div class="tag-create-icon">
+                    <img class="ic-add-tag" src="../../icons/ic-add-tag-dark.png" width="22" height="22" alt="">
+                  </div>
+                  <span class="tag-create-label">Create '<span id="tagCreateName"></span>'</span>
+                  <div class="tag-color-list" id="tagColorList">
+                    <span class="tag-color-dot active" data-color="rgba(185,230,254,1)"
+                      style="background:rgba(185,230,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(178,204,255,1)"
+                      style="background:rgba(178,204,255,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(221,214,254,1)"
+                      style="background:rgba(221,214,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(246,208,254,1)"
+                      style="background:rgba(246,208,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(255,214,174,1)"
+                      style="background:rgba(255,214,174,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(171,239,198,1)"
+                      style="background:rgba(171,239,198,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(254,238,149,1)"
+                      style="background:rgba(254,238,149,1);"></span>
+                  </div>
+                </div>
+                <span style="font-size:11px;color:var(--text-muted);">Press Enter</span>
+              </div>
+              <!-- Tag list -->
+              <div class="tag-list" id="tagList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="filter-label">NOTE</label>
+          <textarea id="optProxyNote" class="input textarea input-dark" rows="3"
+            placeholder="Optional notes for this batch..."
+            style="background:rgba(32, 43, 59, 1);font-size:13px;resize:vertical;"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelProxy">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveProxyOpt">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          Add Proxy
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal" id="importModalOpt" style="display:none;">
+    <div class="modal-overlay" id="importModalOptOverlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <h2>Import Proxies</h2>
+        </div>
+        <button class="btn-close" id="btnCloseImportOpt">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="info-card">
+          One proxy per line. Supported formats:<br>
+          <code>host:port</code> &nbsp;|&nbsp; <code>host:port:user:pass</code> &nbsp;|&nbsp;
+          <code>user:pass@host:port</code> &nbsp;|&nbsp; <code>protocol://user:pass@host:port</code>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="max-width:120px;">
+            <label>Default Type</label>
+            <div class="custom-select custom-select-dark" id="optImportType" data-value="http">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">HTTP</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option selected" data-value="http">HTTP</div>
+                <div class="custom-select-option" data-value="https">HTTPS</div>
+                <div class="custom-select-option" data-value="socks5">SOCKS5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <textarea id="optImportText" class="input textarea" rows="8"
+          placeholder="104.239.5.206:6860:user:pass&#10;socks5://user:pass@host:port"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelImportOpt">Cancel</button>
+        <button class="btn btn-primary" id="btnDoImportOpt">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Import
+        </button>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="modal" id="ruleModal" style="display:none;">
+    <div class="modal-overlay" id="ruleModalOverlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="ruleModalTitle">Add Rule</h2>
+        <button class="btn-close" id="btnCloseRuleModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="ruleId">
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label>Rule Name</label>
+            <input type="text" id="ruleName" class="input" placeholder="e.g. Bypass Google">
+          </div>
+          <div class="form-group" style="max-width:80px;">
+            <label>Priority</label>
+            <input type="number" id="rulePriority" class="input" value="10" min="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Match Type</label>
+            <select id="ruleMatchType" class="input">
+              <option value="domain">Domain</option>
+              <option value="wildcard">Wildcard</option>
+              <option value="regex">Regex</option>
+              <option value="cidr">CIDR</option>
+            </select>
+          </div>
+          <div class="form-group flex-2">
+            <label>Pattern</label>
+            <input type="text" id="rulePattern" class="input" placeholder="e.g. *.google.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Action</label>
+            <select id="ruleAction" class="input">
+              <option value="direct">Direct (bypass proxy)</option>
+              <option value="proxy">Use Proxy</option>
+              <option value="block">Block</option>
+            </select>
+          </div>
+          <div class="form-group" id="ruleProxyGroup" style="display:none;">
+            <label>Use Proxy</label>
+            <select id="ruleProxyId" class="input">
+              <option value="">Default (Active Proxy)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelRule">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveRule">Save Rule</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="exportModal" style="display:none;">
+    <div class="modal-overlay" id="exportModalOverlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          <h2>EXPORT PROXY FILE</h2>
+        </div>
+        <button class="btn-close" id="btnCloseExportModal">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:20px;">
+
+        <div style="display:flex;gap:16px;">
+          <div class="form-group" style="flex:1;">
+            <label class="filter-label">FILE FORMAT</label>
+            <div class="custom-select custom-select-dark" id="exportFileFormat" data-value="csv">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">.csv</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option selected" data-value="csv">.csv</div>
+                <div class="custom-select-option" data-value="excel">.xlsx</div>
+                <div class="custom-select-option" data-value="json">.json</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="flex:2;">
+            <label class="filter-label">PROXY FORMAT</label>
+            <div class="custom-select custom-select-dark" id="exportProxyFormat" data-value="host:port:user:pass"
+              style="min-width:100%;">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">host:port:username:pass</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown" style="min-width:100%;">
+                <div class="custom-select-option selected" data-value="host:port:user:pass">host:port:username:pass
+                </div>
+                <div class="custom-select-option" data-value="host:port@user:pass">host:port@username:pass</div>
+                <div class="custom-select-option" data-value="user:pass:host:port">username:pass:host:port</div>
+                <div class="custom-select-option" data-value="user@pass:host:port">username@pass:host:port</div>
+                <div class="custom-select-option" data-value="host:port">host:port</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="filter-label" style="margin-bottom:12px;display:block;">DATA EXPORT</label>
+          <div style="display:flex;gap:24px;flex-wrap:wrap;">
+            <label class="export-check-item disabled">
+              <input type="checkbox" id="exportIncludeType" checked disabled>
+              <span>Proxy Type</span>
+            </label>
+            <label class="export-check-item disabled">
+              <input type="checkbox" id="exportIncludeProxy" checked disabled>
+              <span>Proxy</span>
+            </label>
+            <label class="export-check-item">
+              <input type="checkbox" id="exportIncludeTag">
+              <span>Tag</span>
+            </label>
+            <label class="export-check-item">
+              <input type="checkbox" id="exportIncludeNote">
+              <span>Note</span>
+            </label>
+            <label class="export-check-item">
+              <input type="checkbox" id="exportIncludeExpires">
+              <span>Expires</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelExport">Cancel</button>
+        <button class="btn btn-primary" id="btnDoExport">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Export
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="more-menu" id="moreMenu" style="display:none;">
+    <div class="more-menu-item" id="moreMenuCheck">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      Check Proxy
+    </div>
+    <div class="more-menu-item" id="moreMenuCopy">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="9" width="13" height="13" rx="2" />
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+      </svg>
+      Copy
+    </div>
+    <div class="more-menu-item" id="moreMenuEdit">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M8 12h8M12 8v8" />
+      </svg>
+      Edit
+    </div>
+    <div class="more-menu-item" id="moreMenuPin">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 4v6l-2 4h10l-2-4V4" />
+        <line x1="12" y1="14" x2="12" y2="20" />
+        <line x1="9" y1="4" x2="15" y2="4" />
+      </svg>
+      <span id="moreMenuPinText">Pin</span>
+    </div>
+    <div class="more-menu-item danger" id="moreMenuDelete">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6" />
+        <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+        <path d="M10 11v6M14 11v6" />
+        <path d="M9 6V4h6v2" />
+      </svg>
+      Delete
+    </div>
+  </div>
+  <div class="modal" id="deleteModal" style="display:none;">
+    <div class="modal-overlay" id="deleteModalOverlay"></div>
+    <div class="modal-dialog delete-dialog">
+      <div class="delete-icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(240,68,56,1)" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
+          <path d="M10 11v6M14 11v6" />
+          <path d="M9 6V4h6v2" />
+        </svg>
+      </div>
+      <h3 class="delete-title">Delete Proxy</h3>
+      <p class="delete-desc">Are you sure you want to delete this proxy? This action cannot be undone.</p>
+      <div class="delete-footer">
+        <button class="delete-btn-cancel" id="btnCancelDelete">Cancel</button>
+        <button class="delete-btn-confirm" id="btnConfirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="bulkEditModal" style="display:none;">
+    <div class="modal-overlay" id="bulkEditModalOverlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
+          <h2>MULTIPLE EDIT</h2>
+        </div>
+        <button class="btn-close" id="btnCloseBulkEdit">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex;flex-direction:column;gap:20px;">
+
+        <div class="form-row">
+          <div class="form-group" style="max-width:140px;">
+            <label class="filter-label">TYPE</label>
+            <div class="custom-select custom-select-dark" id="bulkEditType" data-value="http">
+              <div class="custom-select-trigger">
+                <span class="custom-select-label">HTTP</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </div>
+              <div class="custom-select-dropdown">
+                <div class="custom-select-option selected" data-value="http">HTTP</div>
+                <!-- <div class="custom-select-option" data-value="https">HTTPS</div> -->
+                <!-- <div class="custom-select-option" data-value="socks5">SOCKS5</div> -->
+                <!-- <div class="custom-select-option" data-value="socks4">SOCKS4</div> -->
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label class="filter-label">EXPIRY DATE</label>
+            <div class="single-date-wrap" id="bulkEditDateWrap">
+              <div class="daterange-input input-dark" id="bulkEditDateInput">
+                <span id="bulkEditDateText">mm/dd/yyyy</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </div>
+              <div class="daterange-popup" id="bulkEditDatePopup" style="display:none;">
+                <div class="drp-nav">
+                  <button class="drp-nav-btn" id="bulkEditDatePrev">&#8249;</button>
+                  <span class="drp-month-label" id="bulkEditDateMonthLabel"></span>
+                  <button class="drp-nav-btn" id="bulkEditDateNext">&#8250;</button>
+                </div>
+                <div class="drp-weekdays">
+                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                </div>
+                <div class="drp-days" id="bulkEditDateDays"></div>
+                <div class="drp-footer">
+                  <button class="drp-btn-cancel" id="bulkEditDateCancel">Cancel</button>
+                  <button class="drp-btn-apply" id="bulkEditDateApply">Apply</button>
+                </div>
+              </div>
+              <input type="hidden" id="bulkEditExpires">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="filter-label">TAG</label>
+          <div class="tag-wrap" id="bulkEditTagWrap">
+            <div class="tag-search-row">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input type="text" id="bulkEditTagInput" class="tag-search-input" placeholder="Search or create tags">
+            </div>
+
+            <div class="tag-selected-list" id="bulkEditTagSelectedList"></div>
+
+            <div class="tag-panel" id="bulkEditTagPanel">
+              <div class="tag-create-row" id="bulkEditTagCreateRow" style="display:none;">
+                <div style="display:flex;align-items:center;gap:8px;flex:1;">
+                  <div class="tag-create-icon">
+                    <img class="ic-add-tag" src="../../icons/ic-add-tag-dark.png" width="22" height="22" alt="">
+                  </div>
+                  <span class="tag-create-label">Create '<span id="bulkEditTagCreateName"></span>'</span>
+                  <div class="tag-color-list" id="bulkEditTagColorList">
+                    <span class="tag-color-dot active" data-color="rgba(185,230,254,1)"
+                      style="background:rgba(185,230,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(178,204,255,1)"
+                      style="background:rgba(178,204,255,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(221,214,254,1)"
+                      style="background:rgba(221,214,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(246,208,254,1)"
+                      style="background:rgba(246,208,254,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(255,214,174,1)"
+                      style="background:rgba(255,214,174,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(171,239,198,1)"
+                      style="background:rgba(171,239,198,1);"></span>
+                    <span class="tag-color-dot" data-color="rgba(254,238,149,1)"
+                      style="background:rgba(254,238,149,1);"></span>
+                  </div>
+                </div>
+                <span style="font-size:11px;color:var(--text-muted);">Press Enter</span>
+              </div>
+              <div class="tag-list" id="bulkEditTagList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="filter-label">NOTE</label>
+          <textarea id="bulkEditNote" class="input textarea input-dark" rows="3"
+            placeholder="Add your description here...."></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelBulkEdit">Cancel</button>
+        <button class="btn btn-primary" id="btnSaveBulkEdit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+            <polyline points="17 21 17 13 7 13 7 21" />
+            <polyline points="7 3 7 8 15 8" />
+          </svg>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="../../libs/xlsx.full.min.js"></script>
+  <script src="options.js"></script>
+
+</body>
+
+</html>

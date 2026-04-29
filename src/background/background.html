@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- Firefox MV2 background page -->
+    <!-- Thứ tự load quan trọng: proxy-connector phải load trước proxy-handler -->
+    <script src="../shared/constants.js"></script>
+    <script src="../shared/utils.js"></script>
+    <script src="../shared/storage.js"></script>
+    <script src="../core/proxy-manager.js"></script>
+    <script src="../core/rule-engine.js"></script>
+    <script src="../core/ip-checker.js"></script>
+    <script src="../core/privacy-protector.js"></script>
+    <script src="../core/badge-manager.js"></script>
+    <script src="../core/proxy-connector.js"></script>
+    <script src="../platform/proxy-handler.js"></script>
+    <script src="../platform/auth-handler.js"></script>
+    <script src="background-firefox.js"></script>
+</body>
+
+</html>

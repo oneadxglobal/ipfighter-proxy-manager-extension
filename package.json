@@ -1,0 +1,15 @@
+{
+  "name": "ipfighter-proxy-manager",
+  "version": "1.0.0",
+  "description": "IPFighter Proxy Manager - Professional proxy management extension for Chrome & Firefox",
+  "scripts": {
+    "build": "node build.js",
+    "build:chrome": "node build.js chrome",
+    "build:firefox": "node build.js firefox"
+  },
+  "author": "IPFighter",
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

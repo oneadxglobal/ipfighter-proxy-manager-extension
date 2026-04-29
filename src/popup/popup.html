@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPFighter Proxy Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="../../icons/ic-logo-light.png" width="16" height="auto" alt="IPFighter Proxy Manager Logo">
+        </div>
+        <span class="logo-text">IPFighter Proxy Manager</span>
+      </div>
+      <label class="toggle-wrap" title="Enable / Disable proxy">
+        <input type="checkbox" id="proxyToggle" class="toggle-input">
+        <div class="toggle-track"></div>
+        <div class="toggle-knob"></div>
+      </label>
+    </header>
+    <div class="popup-content">
+
+      <!-- ===== IP DISPLAY ===== -->
+      <div class="ip-area" id="ipArea">
+        <div class="ip-label">Your current IP:</div>
+        <div class="ip-row">
+          <span class="ip-flag" id="ipFlag">🌐</span>
+          <span class="ip-address dim" id="ipAddress">Checking...</span>
+        </div>
+      </div>
+
+      <div id="formTitle" class="hidden formTitle">
+        Add New Proxy
+      </div>
+
+      <!-- ===== VIEW: EMPTY (no proxies) ===== -->
+      <div id="viewEmpty">
+        <button class="btn-add-proxy-big" id="btnAddProxyEmpty">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Add proxy
+        </button>
+      </div>
+
+      <!-- ===== VIEW: PROXY LIST ===== -->
+      <div id="viewList" class="hidden">
+        <div class="search-wrap">
+          <div class="search-box">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="searchInput" placeholder="Search...">
+          </div>
+        </div>
+
+        <div class="tabs-row">
+          <div class="tabs">
+            <span class="tab active" data-tab="manager" data-label="Proxy Manager">
+              <span class="tab-arrow">▶</span>Proxy Manager
+            </span>
+            <span class="tab" data-tab="recent" data-label="Recently Used">Recently Used</span>
+            <span class="tab" data-tab="pinned" data-label="Pinned">Pinned</span>
+          </div>
+          <button class="btn-add-proxy-sm" id="btnAddProxySm">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add proxy
+          </button>
+        </div>
+
+        <div class="proxy-list" id="proxyList">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ===== VIEW: ADD / EDIT FORM ===== -->
+      <div id="viewForm" class="hidden">
+        <div class="form-body">
+          <div class="form-row">
+            <div class="form-group form-group--type">
+              <div class="form-label">Type <span class="required">*</span></div>
+              <div class="custom-select" id="typeSelect">
+                <div class="custom-select-trigger">
+                  <span class="custom-select-value">HTTP</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                    <path d="M1 1l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div class="custom-select-dropdown">
+                  <div class="custom-select-option active" data-value="http">HTTP</div>
+                </div>
+              </div>
+              <input type="hidden" id="inputType" value="http">
+            </div>
+            <div class="form-group form-group--format">
+              <div class="form-label">Input format <span class="required">*</span></div>
+              <div class="custom-select" id="formatSelect">
+                <div class="custom-select-trigger">
+                  <span class="custom-select-value">host:port:username:pass</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                    <path d="M1 1l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div class="custom-select-dropdown">
+                  <div class="custom-select-option active" data-value="host:port:user:pass">host:port:username:pass
+                  </div>
+                  <div class="custom-select-option" data-value="host:port@user:pass">host:port@username:pass</div>
+                  <div class="custom-select-option" data-value="user:pass:host:port">username:pass:host:port</div>
+                  <div class="custom-select-option" data-value="user:pass@host:port">username:pass@host:port</div>
+                  <div class="custom-select-option" data-value="host:port">host:port</div>
+                </div>
+              </div>
+              <input type="hidden" id="inputFormat" value="host:port:user:pass">
+            </div>
+          </div>
+
+          <div class="form-group form-group--mb">
+            <div class="form-label">Add the proxies here <span class="required">*</span></div>
+            <input type="text" id="inputProxies" class="f-input" placeholder="Enter proxy in the specified format">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <div class="form-label">Expired date</div>
+              <div class="date-picker-wrap" id="datePickerWrap">
+                <div class="date-trigger" id="dateTrigger">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  <span class="date-trigger-value" id="dateTriggerValue">mm/dd/yy</span>
+                </div>
+                <div class="date-dropdown" id="dateDropdown">
+                  <div class="date-header">
+                    <button class="date-nav" id="datePrev">&#8249;</button>
+                    <span class="date-month-year" id="dateMonthYear"></span>
+                    <button class="date-nav" id="dateNext">&#8250;</button>
+                  </div>
+                  <div class="date-grid-head">
+                    <span>Su</span><span>Mo</span><span>Tu</span>
+                    <span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+                  <div class="date-grid" id="dateGrid"></div>
+                  <div class="date-footer">
+                    <button class="date-clear" id="dateClear">Clear</button>
+                    <button class="date-apply" id="dateApply">Apply</button>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" id="inputExpiry" value="">
+            </div>
+            <div class="form-group">
+              <div class="form-label">Tag</div>
+              <div class="tag-select-wrap" id="tagSelectWrap">
+                <div class="tag-select-trigger" id="tagSelectTrigger">
+                  <span class="tag-select-value" id="tagSelectValue">-- none --</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+                    <path d="M1 1l4 4 4-4" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div class="tag-select-dropdown" id="tagSelectDropdown">
+                  <div class="tag-option-list" id="tagOptionList"></div>
+                  <div class="tag-select-footer">
+                    <button class="date-clear" id="tagClear">Clear</button>
+                    <button class="date-apply" id="tagApply">Apply</button>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" id="inputTag" value="">
+            </div>
+          </div>
+
+          <div class="form-group form-group--mb">
+            <div class="form-label">Note</div>
+            <textarea id="inputNote" class="f-textarea" placeholder="Add your description here...."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-back" id="btnBack">Back</button>
+            <button class="btn-submit" id="btnSubmit">Add Proxy</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end popup-content -->
+
+    <!-- ===== FOOTER NAV ===== -->
+    <footer class="footer-nav">
+      <button class="nav-btn active" data-page="manager">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="8" height="8" rx="1.5" />
+          <rect x="14" y="2" width="8" height="8" rx="1.5" />
+          <rect x="2" y="14" width="8" height="8" rx="1.5" />
+          <rect x="14" y="14" width="8" height="8" rx="1.5" />
+        </svg>
+        Proxy Manager
+      </button>
+      <button class="nav-btn" data-page="rules">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2" />
+          <polyline points="9 12 11 14 15 10" />
+          <line x1="8" y1="7" x2="16" y2="7" />
+        </svg>
+        Smart Rules
+      </button>
+      <button class="nav-btn" data-page="settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+        </svg>
+        Settings
+      </button>
+    </footer>
+
+  </div><!-- end popup-container -->
+
+  <div class="toast" id="toast"></div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
