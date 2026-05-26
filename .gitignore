@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+
+# Build artifacts
+dist/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

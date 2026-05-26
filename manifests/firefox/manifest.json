@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "IPFighter Proxy Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Professional proxy manager with smart rules, privacy protection & multi-proxy support",
   "permissions": [
     "proxy",

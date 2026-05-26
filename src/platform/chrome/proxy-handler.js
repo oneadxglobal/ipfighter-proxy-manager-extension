@@ -13,39 +13,10 @@ const ChromeProxyHandler = {
       ChromeAuthHandler.clearCredentials();
     }
 
-    const rules = await Storage.getRules();
-    const enabledRules = rules.filter(r => r.enabled);
-    const settings = await Storage.getSettings();
-    const bypassList = settings.bypassList || [];
-    const effectiveBypassList = settings.bypassMode === 'default' ? [] : bypassList;
-
-
-    if (enabledRules.length > 0 || effectiveBypassList.length > 0) {
-      const pacScript = await RuleEngine.generatePacScript(proxy);
-      return new Promise((resolve, reject) => {
-        chrome.proxy.settings.set({
-          value: { mode: 'pac_script', pacScript: { data: pacScript } },
-          scope: 'regular'
-        }, () => {
-          if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
-          else { resolve(); }
-        });
-      });
-    }
-
-    const scheme = proxy.type === 'socks5' || proxy.type === 'socks' ? 'socks5'
-      : proxy.type === 'socks4' ? 'socks4'
-        : proxy.type === 'https' ? 'https' : 'http';
-
+    const pacScript = await RuleEngine.generatePacScript(proxy, Date.now());
     return new Promise((resolve, reject) => {
       chrome.proxy.settings.set({
-        value: {
-          mode: 'fixed_servers',
-          rules: {
-            singleProxy: { scheme, host: proxy.host, port: proxy.port },
-            bypassList: ['localhost', '127.0.0.1', '::1', '<local>']
-          }
-        },
+        value: { mode: 'pac_script', pacScript: { data: pacScript } },
         scope: 'regular'
       }, () => {
         if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
@@ -75,24 +46,26 @@ const ChromeProxyHandler = {
   },
 
   async setupTestProxy(proxy) {
-    const scheme = proxy.type === 'socks5' || proxy.type === 'socks' ? 'socks5'
-      : proxy.type === 'socks4' ? 'socks4'
-        : proxy.type === 'https' ? 'https' : 'http';
+    // Luôn dùng PAC Script với Session ID duy nhất để ép Chrome làm mới kết nối cho việc check proxy
+    const pacScript = `
+      function FindProxyForURL(url, host) {
+        // Session: ${Date.now()}
+        if (!host || host === "localhost" || host === "127.0.0.1" || isPlainHostName(host)) return "DIRECT";
+        return "${RuleEngine._proxyToPacString(proxy)}";
+      }
+    `;
 
     return new Promise((resolve, reject) => {
       chrome.proxy.settings.set({
-        value: {
-          mode: 'fixed_servers',
-          rules: { singleProxy: { scheme, host: proxy.host, port: proxy.port } }
-        },
+        value: { mode: 'pac_script', pacScript: { data: pacScript } },
         scope: 'regular'
       }, () => {
         if (chrome.runtime.lastError) {
           reject(new Error(chrome.runtime.lastError.message));
         } else {
+          ChromeAuthHandler.setCredentials(proxy.username || '', proxy.password || '');
           resolve();
         }
-        ChromeAuthHandler.setCredentials(proxy.username || '', proxy.password || '');
       });
     });
   },

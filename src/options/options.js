@@ -385,7 +385,7 @@ function renderProxyTable() {
 
   if (state.proxies.length === 0) {
     if (thead) thead.style.display = 'none';
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="11">No proxies configured. Click "+ Add New Proxy" to get started.</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="11">No proxies configured. Click "+Add New Proxy" to get started.</td></tr>`;
     tbody.innerHTML += Array(PAGE_SIZE - 1).fill(`<tr style="height:53px;"><td colspan="11"></td></tr>`).join('');
 
     document.getElementById('proxyPagination').innerHTML = '';
@@ -417,8 +417,8 @@ function renderProxyTable() {
 
     const expires = p.expires
       ? (new Date(p.expires) < new Date()
-        ? `<span style="color:#FF6B6B;font-size:12px;">${p.expires}</span>`
-        : `<span style="font-size:12px;">${p.expires}</span>`)
+        ? `<span style="color:#FF6B6B;font-size:13px;">${p.expires}</span>`
+        : `<span style="font-size:13px;">${p.expires}</span>`)
       : `<span class="text-muted">—</span>`;
 
     const createdAt = p.createdAt
@@ -431,13 +431,13 @@ function renderProxyTable() {
       <td>${typeBadge}</td>
       <td>
         <div style="display:flex;align-items:center;gap:6px;">
-         <span style="font-family:Consolas,monospace;font-size:12px;">${p.host}:${p.port}</span>
+         <span style="font-family:Consolas,monospace;font-size:13px;">${p.host}:${p.port}</span>
           ${p.isPinned ? `<img class="pin-icon" src="../../icons/pin-02.png" width="14" height="14" alt="Pinned">` : ''}
         </div>
       </td>
       <td>${statusCell}</td>
-      <td style="font-family:Consolas,monospace;font-size:12px;">${p.ip || p.host}</td>
-      <td style="font-size:12px;">
+      <td style="font-family:Consolas,monospace;font-size:13px;">${p.ip || p.host}</td>
+      <td style="font-size:13px;">
         ${p.location
         ? `<div style="display:flex;align-items:center;gap:6px;">
               ${p.countryCode ? `<img src="https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@2.6.0/flags/${p.countryCode.toLowerCase()}.svg" width="16" height="16" style="border-radius:50%;flex-shrink:0;" onerror="this.replaceWith('🌐')">` : ''}
@@ -448,11 +448,11 @@ function renderProxyTable() {
       </td>
       <td>${renderTagBadges(p.tag)}</td>
       <td class="note-cell" data-id="${p.id}" style="max-width:120px;">
-        <span class="note-display" style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;" title="${esc(p.note || '')}">${p.note ? esc(p.note) : '<span class="text-muted">—</span>'}</span>
-        <input class="note-input input" style="display:none;font-size:12px;padding:4px 8px;height:28px;" value="${esc(p.note || '')}" data-id="${p.id}">
+        <span class="note-display" style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;" title="${esc(p.note || '')}">${p.note ? esc(p.note) : '<span class="text-muted">—</span>'}</span>
+        <input class="note-input input" style="display:none;font-size:13px;padding:4px 8px;height:28px;" value="${esc(p.note || '')}" data-id="${p.id}">
       </td>
       <td>${expires}</td>
-      <td style="font-size:12px;">${createdAt}</td>
+      <td style="font-size:13px;">${createdAt}</td>
       <td>
         <button class="btn-more" data-action="more" data-id="${p.id}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -531,7 +531,7 @@ document.getElementById('bulkBtnCheck').addEventListener('click', async () => {
   renderProxyTable();
 
   for (let i = 0; i < checkedIds.length; i++) {
-    btn.innerHTML = `checking...`;
+    btn.innerHTML = `Checking`;
 
     await msg('CHECK_PROXY', { id: checkedIds[i] });
 
@@ -717,7 +717,6 @@ function renderBulkTagList(search) {
     const isSelected = bulkTagState.selectedTags.find(s => s.name === t.name);
     return `<div class="tag-list-item ${isSelected ? 'selected' : ''}" data-name="${t.name}" style="display:flex;align-items:center;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:8px;">
-        <span class="tag-list-dot" style="background:${t.color};"></span>
         <span>${t.name}</span>
       </div>
     </div>`;
@@ -763,7 +762,7 @@ function renderTagBadges(tagData) {
       ${tags.map(t => `<span style="
         display:inline-flex;align-items:center;
         padding:2px 8px;border-radius:999px;
-        font-size:11px;font-weight:600;
+        font-size:11px;font-weight:400;
         background:${t.color};
         border:none;
         color:rgba(65,70,81,1);
@@ -814,6 +813,15 @@ function renderPagination(filteredCount) {
     ${pages}
     <button class="btn-page" data-page="next" ${cur === total ? 'disabled' : ''}>›</button>
   `;
+}
+
+function formatProxyString(p, format) {
+  if (!p.username) return `${p.host}:${p.port}`;
+  if (format === 'host:port:user:pass') return `${p.host}:${p.port}:${p.username}${p.password ? ':' + p.password : ''}`;
+  if (format === 'host:port@user:pass') return `${p.host}:${p.port}@${p.username}${p.password ? ':' + p.password : ''}`;
+  if (format === 'user:pass:host:port') return `${p.username}${p.password ? ':' + p.password : ''}:${p.host}:${p.port}`;
+  if (format === 'user:pass@host:port') return `${p.username}${p.password ? ':' + p.password : ''}@${p.host}:${p.port}`;
+  return `${p.host}:${p.port}:${p.username}${p.password ? ':' + p.password : ''}`;
 }
 
 function openProxyModal(proxy) {
@@ -912,8 +920,18 @@ function openProxyModal(proxy) {
   typeSelect.querySelectorAll('.custom-select-option').forEach(o => {
     o.classList.toggle('selected', o.dataset.value === typeVal);
   });
+
+  const fmtVal = proxy?.inputFormat || 'host:port:user:pass';
+  const fmtSelect = document.getElementById('optProxyInputFormat');
+  fmtSelect.dataset.value = fmtVal;
+  const fmtOpt = fmtSelect.querySelector(`.custom-select-option[data-value="${fmtVal}"]`);
+  fmtSelect.querySelector('.custom-select-label').textContent = fmtOpt ? fmtOpt.textContent.trim() : fmtVal;
+  fmtSelect.querySelectorAll('.custom-select-option').forEach(o => {
+    o.classList.toggle('selected', o.dataset.value === fmtVal);
+  });
+
   document.getElementById('optProxyExpires').value = proxy?.expires || '';
-  bulk.value = proxy ? `${proxy.host}:${proxy.port}${proxy.username ? ':' + proxy.username + ':' + proxy.password : ''}` : '';
+  bulk.value = proxy ? formatProxyString(proxy, fmtVal) : '';
   document.getElementById('optProxyNote').value = proxy?.note || '';
 }
 
@@ -956,15 +974,6 @@ async function saveProxy() {
     return;
   }
 
-  const inputKeys = parsed.map(p => `${p.host}:${p.port}`);
-  const inputDuplicates = inputKeys.filter((key, idx) => inputKeys.indexOf(key) !== idx);
-  if (inputDuplicates.length > 0) {
-    const uniqueDups = [...new Set(inputDuplicates)];
-    document.getElementById('proxyValidateMsg').textContent = `Duplicate proxies in input: ${uniqueDups.join(', ')}`;
-    document.getElementById('proxyValidateMsg').style.display = 'block';
-    return;
-  }
-
   document.getElementById('proxyValidateMsg').style.display = 'none';
 
   // ---- EDIT MODE ----
@@ -975,20 +984,12 @@ async function saveProxy() {
       return;
     }
     const p = parsed[0];
-    // Check trùng với proxy khác (không tính chính nó)
-    const isDuplicate = state.proxies.some(
-      x => x.id !== id && x.host === p.host && String(x.port) === String(p.port)
-    );
-    if (isDuplicate) {
-      document.getElementById('proxyValidateMsg').textContent = `Proxy "${p.host}:${p.port}" already exists.`;
-      document.getElementById('proxyValidateMsg').style.display = 'block';
-      return;
-    }
     const existingProxy = state.proxies.find(x => x.id === id);
     await msg('UPDATE_PROXY', {
       ...existingProxy,
       id,
       type,
+      inputFormat,
       host: p.host,
       port: p.port,
       username: p.username || '',
@@ -1014,42 +1015,11 @@ async function saveProxy() {
                           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
                         </svg> Adding ...`;
 
-  // Kiểm tra trùng lặp
-  const duplicates = [];
-  const toAdd = [];
-
+  // Add tất cả proxy
   for (const p of parsed) {
-    const isDuplicate = state.proxies.some(
-      existing => existing.host === p.host && String(existing.port) === String(p.port)
-    );
-    if (isDuplicate) {
-      duplicates.push(`${p.host}:${p.port}`);
-    } else {
-      toAdd.push(p);
-    }
-  }
-
-  // Tất cả đều trùng → báo lỗi, không add
-  if (toAdd.length === 0) {
-    saveBtn.disabled = false;
-    saveBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="3" width="18" height="18" rx="2"/>
-      <line x1="12" y1="8" x2="12" y2="16"/>
-      <line x1="8" y1="12" x2="16" y2="12"/>
-    </svg> Add Proxy`;
-    const validateMsg = document.getElementById('proxyValidateMsg');
-    validateMsg.style.display = 'block';
-    validateMsg.style.color = 'var(--danger)';
-    showToast(duplicates.length === 1
-      ? `Proxy "${duplicates[0]}" already exists.`
-      : `${duplicates.length} proxies already exist.`, 'error');
-    return;
-  }
-
-  // Add những proxy chưa trùng
-  for (const p of toAdd) {
     const data = {
       type,
+      inputFormat,
       host: p.host,
       port: p.port,
       username: p.username || '',
@@ -1068,11 +1038,7 @@ async function saveProxy() {
   populateTagFilter();
   closeProxyModal();
 
-  if (duplicates.length > 0) {
-    showToast(`Added ${toAdd.length} proxy. Skipped ${duplicates.length} duplicate(s).`, 'warning');
-  } else {
-    showToast(`Added ${toAdd.length} proxy!`, 'success');
-  }
+  showToast(`Added ${parsed.length} proxy!`, 'success');
 }
 function parseProxyLine(line, format) {
   const p = line.split(':');
@@ -1174,6 +1140,7 @@ async function doImport(file) {
         if (!p) return;
         proxies.push({
           type: item.type.toLowerCase(),
+          inputFormat: item.inputFormat || 'host:port:user:pass',
           host: p.host, port: p.port,
           username: p.username || '', password: p.password || '',
           tag: item.tag ? JSON.stringify(item.tag.split('/').map(n => ({ name: n.trim(), color: resolveTagColor(n.trim()) }))) : '',
@@ -1214,7 +1181,7 @@ async function doImport(file) {
       if (!p) return;
       const tagName = idxTag >= 0 ? cols[idxTag] : '';
       proxies.push({
-        type, host: p.host, port: p.port,
+        type, inputFormat: 'host:port:user:pass', host: p.host, port: p.port,
         username: p.username || '', password: p.password || '',
         tag: tagName ? JSON.stringify(tagName.split('/').map(n => ({ name: n.trim(), color: resolveTagColor(n.trim()) }))) : '',
         note: idxNote >= 0 ? cols[idxNote] : '',
@@ -1246,7 +1213,7 @@ async function doImport(file) {
       if (!p) return;
       const tagName = idxTag >= 0 ? String(cols[idxTag] || '') : '';
       proxies.push({
-        type, host: p.host, port: p.port,
+        type, inputFormat: 'host:port:user:pass', host: p.host, port: p.port,
         username: p.username || '', password: p.password || '',
         tag: tagName ? JSON.stringify(tagName.split('/').map(n => ({ name: n.trim(), color: resolveTagColor(n.trim()) }))) : '',
         note: idxNote >= 0 ? String(cols[idxNote] || '') : '',
@@ -1262,25 +1229,6 @@ async function doImport(file) {
 
   if (!proxies.length) { showToast('No valid proxies found!', 'warning'); return; }
 
-  // Check trùng trong chính file import
-  const fileKeys = proxies.map(p => `${p.host}:${p.port}`);
-  const fileDuplicates = fileKeys.filter((key, idx) => fileKeys.indexOf(key) !== idx);
-  if (fileDuplicates.length > 0) {
-    const unique = [...new Set(fileDuplicates)];
-    showToast(`Duplicate proxies in file: ${unique.join(', ')}`, 'error');
-    return;
-  }
-
-  // Check trùng với data đang có
-  const existingDuplicates = proxies
-    .filter(p => state.proxies.some(x => x.host === p.host && String(x.port) === String(p.port)))
-    .map(p => `${p.host}:${p.port}`);
-  if (existingDuplicates.length > 0) {
-    showToast(existingDuplicates.length === 1
-      ? `Already exists: ${existingDuplicates[0]}`
-      : `Already exists: ${existingDuplicates.length} proxies`, 'error');
-    return;
-  }
 
   for (const p of proxies) {
     await msg('ADD_PROXY', p);
@@ -2308,7 +2256,7 @@ document.getElementById('btnThemeLight').addEventListener('click', () => {
 
 document.getElementById('btnThemeDark').addEventListener('click', () => {
   document.documentElement.removeAttribute('data-theme');
-  document.getElementById('logoImg').src = '../../icons/ic-logo-dark.png';
+  document.getElementById('logoImg').src = '../../icons/ic-logo-light.png';
   document.getElementById('btnThemeDark').classList.add('active');
   document.getElementById('btnThemeLight').classList.remove('active');
   chrome.storage.local.set({ theme: 'dark' });
@@ -2326,7 +2274,7 @@ chrome.storage.local.get('theme', (data) => {
     document.getElementById('btnThemeDark').classList.remove('active');
   } else {
     document.documentElement.removeAttribute('data-theme');
-    document.getElementById('logoImg').src = '../../icons/ic-logo-dark.png';
+    document.getElementById('logoImg').src = '../../icons/ic-logo-light.png';
     document.getElementById('btnThemeDark').classList.add('active');
     document.getElementById('btnThemeLight').classList.remove('active');
   }

@@ -178,13 +178,12 @@ const RuleEngine = {
     }
   },
 
-  async generatePacScript(defaultProxy) {
+  async generatePacScript(defaultProxy, sessionId = null) {
     const rules = await Storage.getRules();
     const enabledRules = rules.filter(r => r.enabled);
     const proxies = await Storage.getProxies();
     const settings = await Storage.getSettings();
     const bypassList = settings.bypassMode === 'default' ? [] : (settings.bypassList || []);
-
 
     const compiledBypass = RuleEngine.compileBypassList(bypassList);
 
@@ -204,6 +203,9 @@ const RuleEngine = {
     }
 
     let pac = 'function FindProxyForURL(url, host) {\n';
+    if (sessionId) {
+      pac += '  // Session ID: ' + sessionId + '\n';
+    }
     pac += '  if (!host || host === "localhost" || host === "127.0.0.1" || host === "::1" || isPlainHostName(host)) return "DIRECT";\n';
     pac += '  host = host.toLowerCase();\n';
 

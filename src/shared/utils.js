@@ -27,7 +27,8 @@ const Utils = {
         host: urlMatch[4],
         port: parseInt(urlMatch[5]),
         username: urlMatch[2] || '',
-        password: urlMatch[3] || ''
+        password: urlMatch[3] || '',
+        inputFormat: 'host:port:user:pass' // fallback format
       };
     }
 
@@ -48,7 +49,8 @@ const Utils = {
           host: beforeParts[0],
           port: parseInt(beforeParts[1]),
           username: afterParts[0] || '',
-          password: afterParts[1] || ''
+          password: afterParts[1] || '',
+          inputFormat: 'host:port@user:pass'
         };
       }
 
@@ -58,7 +60,8 @@ const Utils = {
           host: afterParts[0],
           port: parseInt(afterParts[1]),
           username: beforeParts[0] || '',
-          password: beforeParts[1] || ''
+          password: beforeParts[1] || '',
+          inputFormat: 'user:pass@host:port'
         };
       }
     }
@@ -71,7 +74,8 @@ const Utils = {
         host: parts[0],
         port: parseInt(parts[1]),
         username: '',
-        password: ''
+        password: '',
+        inputFormat: 'host:port'
       };
     }
     if (parts.length === 4 && isHost(parts[0]) && isPort(parts[1])) {
@@ -80,7 +84,8 @@ const Utils = {
         host: parts[0],
         port: parseInt(parts[1]),
         username: parts[2] || '',
-        password: parts[3] || ''
+        password: parts[3] || '',
+        inputFormat: 'host:port:user:pass'
       };
     }
     if (parts.length === 4 && isHost(parts[2]) && isPort(parts[3])) {
@@ -89,7 +94,8 @@ const Utils = {
         host: parts[2],
         port: parseInt(parts[3]),
         username: parts[0] || '',
-        password: parts[1] || ''
+        password: parts[1] || '',
+        inputFormat: 'user:pass:host:port'
       };
     }
     if (parts.length >= 2 && isPort(parts[1])) {
@@ -98,7 +104,8 @@ const Utils = {
         host: parts[0],
         port: parseInt(parts[1]),
         username: parts[2] || '',
-        password: parts[3] || ''
+        password: parts[3] || '',
+        inputFormat: 'host:port:user:pass'
       };
     }
 

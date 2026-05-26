@@ -37,6 +37,8 @@ async function loadState() {
   const themeData = await new Promise(r => chrome.storage.local.get('theme', r));
   if (themeData.theme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
   }
   render();
 }
@@ -205,43 +207,17 @@ async function handleSubmitForm() {
     return;
   }
 
-  const inputKeys = parsedList.map(p => `${p.host}:${p.port}`);
-  const inputDups = inputKeys.filter((k, idx) => inputKeys.indexOf(k) !== idx);
-  if (inputDups.length > 0) {
-    const unique = [...new Set(inputDups)];
-    showToast(`Duplicate proxies in input: ${unique.join(', ')}`, 'error');
-    return;
-  }
-
   const existingProxies = await sendMessage('GET_PROXIES') || [];
-  const duplicates = parsedList.filter(p =>
-    existingProxies.some(e => e.host === p.host && String(e.port) === String(p.port))
-  );
-
-  if (duplicates.length === parsedList.length) {
-    // Tất cả đều trùng
-    const names = duplicates.map(p => `${p.host}:${p.port}`);
-    showToast(
-      duplicates.length === 1
-        ? `Proxy "${names[0]}" already exists.`
-        : `All proxies already exist: ${names.join(', ')}`,
-      'error'
-    );
-    return;
-  }
-
-  const toAdd = parsedList.filter(p =>
-    !existingProxies.some(e => e.host === p.host && String(e.port) === String(p.port))
-  );
 
   try {
     showToast('Checking proxy...', 'success');
     const beforeIds = new Set(existingProxies.map(x => x.id));
 
-    for (const p of toAdd) {
+    for (const p of parsedList) {
       p.expires = expiry;
       p.tag = tag;
       p.note = note;
+      p.inputFormat = format;
       await sendMessage('ADD_PROXY', p);
     }
 
@@ -259,11 +235,7 @@ async function handleSubmitForm() {
 
     state.proxies = await sendMessage('GET_PROXIES') || [];
 
-    if (duplicates.length > 0) {
-      showToast(`Added ${toAdd.length}. Skipped ${duplicates.length} duplicate(s).`, 'warning');
-    } else {
-      showToast('Added & connected', 'success');
-    }
+    showToast(`Added ${parsedList.length} proxy(ies) & connected`, 'success');
 
     clearForm();
     showView('list');
@@ -693,7 +665,6 @@ function initTagSelect() {
       const isChecked = tempSelected.find(x => x.name === t.name);
       return `
         <div class="tag-option-item ${isChecked ? 'checked' : ''}" data-name="${t.name}" data-color="${t.color}">
-          <div class="tag-color-dot" style="background:${t.color}"></div>
           <span class="tag-option-name">${t.name}</span>
           <div class="tag-option-checkbox">
             ${isChecked ? `<svg width="10" height="8" viewBox="0 0 10 8" fill="none">
@@ -742,16 +713,7 @@ function initTagSelect() {
     selectedTags = [...tempSelected];
     if (selectedTags.length > 0) {
       hidden.value = JSON.stringify(selectedTags);
-      valueEl.innerHTML = selectedTags.map(t =>
-        `<span class="tag-badge-trigger" style="
-        display:inline-flex;align-items:center;
-        padding:2px 8px;border-radius:999px;
-        font-size:11px;font-weight:600;
-        background:${t.color};
-        border:none;
-        color:rgba(65,70,81,1);
-        white-space:nowrap;">${escHtml(t.name)}</span>`
-      ).join('');
+      valueEl.textContent = selectedTags.map(t => t.name).join(', ');
       valueEl.classList.add('has-value');
     } else {
       hidden.value = '';
@@ -776,16 +738,11 @@ function renderTagBadges(tagData) {
   try {
     const tags = JSON.parse(tagData);
     if (!Array.isArray(tags) || tags.length === 0) return '';
-    return tags.map(t => `
-      <span style="
-        display:inline-flex;align-items:center;
-        padding:2px 8px;border-radius:999px;
-        font-size:11px;font-weight:600;
-        background:${t.color};
-        border:none;
-        color:rgba(65,70,81,1);
-        white-space:nowrap;">${escHtml(t.name)}</span>
-    `).join('');
+    return tags.map(t => {
+      const color = t.color || 'rgba(164, 167, 174, 1)';
+      // Use solid background and dark text as seen in Options page
+      return `<span class="proxy-tag-badge" style="background: ${color} !important; border: none !important; color: rgba(10, 13, 18, 0.9) !important;">${escHtml(t.name)}</span>`;
+    }).join('');
   } catch {
     return '';
   }

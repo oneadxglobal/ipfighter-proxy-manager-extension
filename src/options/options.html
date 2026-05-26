@@ -217,110 +217,108 @@
             </div>
           </div>
           <div class="table-wrap">
-            <div class="table-wrap">
-              <table class="table">
-                <colgroup>
-                  <col class="col-check">
-                  <col class="col-type">
-                  <col class="col-proxy">
-                  <col class="col-status">
-                  <col class="col-ip">
-                  <col class="col-location">
-                  <col class="col-tag">
-                  <col class="col-note">
-                  <col class="col-expires">
-                  <col class="col-createdate">
-                  <col class="col-more">
-                </colgroup>
-                <!-- Thay toàn bộ <thead> cũ -->
-                <thead>
-                  <tr>
-                    <th><input type="checkbox" id="checkAll" class="row-checkbox"></th>
-                    <th class="th-sortable" data-sort="type">
-                      Type
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th class="th-sortable" data-sort="host">
-                      Proxy
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th class="th-sortable" data-sort="status">
-                      Status
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th class="th-sortable" data-sort="ip">
-                      IP
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th class="th-sortable" data-sort="location">
-                      Location
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th>Tag</th>
-                    <th>Note</th>
-                    <th class="th-sortable" data-sort="expires">
-                      Expires
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th class="th-sortable" data-sort="createdAt">
-                      Create Date
-                      <span class="sort-icons">
-                        <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="4,0 8,5 0,5" />
-                        </svg>
-                        <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
-                          <polygon points="0,0 8,0 4,5" />
-                        </svg>
-                      </span>
-                    </th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="proxyTableBody"></tbody>
-              </table>
-            </div>
+            <table class="table">
+              <colgroup>
+                <col class="col-check">
+                <col class="col-type">
+                <col class="col-proxy">
+                <col class="col-status">
+                <col class="col-ip">
+                <col class="col-location">
+                <col class="col-tag">
+                <col class="col-note">
+                <col class="col-expires">
+                <col class="col-createdate">
+                <col class="col-more">
+              </colgroup>
+              <!-- Thay toàn bộ <thead> cũ -->
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="checkAll" class="row-checkbox"></th>
+                  <th class="th-sortable" data-sort="type">
+                    Type
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th class="th-sortable" data-sort="host">
+                    Proxy
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th class="th-sortable" data-sort="status">
+                    Status
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th class="th-sortable" data-sort="ip">
+                    IP
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th class="th-sortable" data-sort="location">
+                    Location
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th>Tag</th>
+                  <th>Note</th>
+                  <th class="th-sortable" data-sort="expires">
+                    Expires
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th class="th-sortable" data-sort="createdAt">
+                    Create Date
+                    <span class="sort-icons">
+                      <svg class="sort-asc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="4,0 8,5 0,5" />
+                      </svg>
+                      <svg class="sort-desc" width="8" height="5" viewBox="0 0 8 5" fill="currentColor">
+                        <polygon points="0,0 8,0 4,5" />
+                      </svg>
+                    </span>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="proxyTableBody"></tbody>
+            </table>
             <div class="table-bottom-bar">
               <div class="bulk-action-bar" id="bulkActionBar" style="display:none;">
                 <!-- <span class="bulk-action-info"><span id="bulkSelectedCount">0</span> selected</span> -->
@@ -408,7 +406,7 @@
             <textarea id="bypassList" class="input textarea" rows="10"
               placeholder="Enter the list of domain"></textarea>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
-              <p style="font-size:15px;color:var(--text-muted);">Support regex, wildcard, CIDR range, conditional
+              <p class="bypass-help-text" style="font-size:15px;">Support regex, wildcard, CIDR range, conditional
                 combination
                 (domain + port + method)</p>
               <button class="btn btn-primary" id="btnSaveBypass">
@@ -562,7 +560,7 @@
         </div>
         <div class="about-outer">
           <div class="about-card">
-            <h2 class="about-title">IPFighter Proxy Manager</h2>
+            <h2 class="about-title">IPFighter Proxy Manager - Version 1.0.1</h2>
             <p class="about-desc">Professional proxy management extension with smart routing rules, advanced privacy
               protection and seamless multi-proxy support.</p>
             <div class="about-features">
@@ -570,7 +568,7 @@
                 <span class="feature-icon-wrap" style="background:rgba(234, 179, 8, 0.1);">
                   <img src="../../icons/ic-about-lock.png" width="auto" height="20" alt="">
                 </span>
-                <span>HTTP & SOCKS5 Proxy with Auth</span>
+                <span>HTTP Proxy with Auth</span>
               </div>
               <div class="feature-item">
                 <span class="feature-icon-wrap" style="background:rgba(244, 114, 182, 0.1);">
@@ -755,9 +753,14 @@
               <div class="tag-create-row" id="tagCreateRow" style="display:none;">
                 <div style="display:flex;align-items:center;gap:8px;flex:1;">
                   <div class="tag-create-icon">
-                    <img class="ic-add-tag" src="../../icons/ic-add-tag-dark.png" width="22" height="22" alt="">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(30, 77, 255, 1)">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="16" stroke="white" stroke-width="2" />
+                      <line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="2" />
+                    </svg>
                   </div>
-                  <span class="tag-create-label">Create '<span id="tagCreateName"></span>'</span>
+                  <span class="tag-create-label">Create <span style="color:rgba(30, 77, 255, 1)">'<span
+                        id="tagCreateName"></span>'</span></span>
                   <div class="tag-color-list" id="tagColorList">
                     <span class="tag-color-dot active" data-color="rgba(185,230,254,1)"
                       style="background:rgba(185,230,254,1);"></span>
@@ -922,11 +925,14 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <div style="display:flex;align-items:center;gap:10px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" y1="3" x2="12" y2="15" />
-          </svg>
+          <div id="exportModalIconWrap"
+            style="width:36px;height:36px;background:rgba(23, 58, 206, 0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(30, 77, 255, 1)" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+          </div>
           <h2>EXPORT PROXY FILE</h2>
         </div>
         <button class="btn-close" id="btnCloseExportModal">✕</button>
@@ -935,7 +941,7 @@
 
         <div style="display:flex;gap:16px;">
           <div class="form-group" style="flex:1;">
-            <label class="filter-label">FILE FORMAT</label>
+            <label class="filter-label">FILE FORMAT <span style="color:var(--danger)">*</span></label>
             <div class="custom-select custom-select-dark" id="exportFileFormat" data-value="csv">
               <div class="custom-select-trigger">
                 <span class="custom-select-label">.csv</span>
@@ -952,7 +958,7 @@
           </div>
 
           <div class="form-group" style="flex:2;">
-            <label class="filter-label">PROXY FORMAT</label>
+            <label class="filter-label">PROXY FORMAT <span style="color:var(--danger)">*</span></label>
             <div class="custom-select custom-select-dark" id="exportProxyFormat" data-value="host:port:user:pass"
               style="min-width:100%;">
               <div class="custom-select-trigger">
@@ -1082,11 +1088,14 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <div style="display:flex;align-items:center;gap:10px;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
-            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
-          </svg>
+          <div id="bulkEditModalIconWrap"
+            style="width:36px;height:36px;background:rgba(23, 58, 206, 0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(30, 77, 255, 1)" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+          </div>
           <h2>MULTIPLE EDIT</h2>
         </div>
         <button class="btn-close" id="btnCloseBulkEdit">✕</button>
@@ -1095,7 +1104,7 @@
 
         <div class="form-row">
           <div class="form-group" style="max-width:140px;">
-            <label class="filter-label">TYPE</label>
+            <label class="filter-label">TYPE <span style="color:var(--danger)">*</span></label>
             <div class="custom-select custom-select-dark" id="bulkEditType" data-value="http">
               <div class="custom-select-trigger">
                 <span class="custom-select-label">HTTP</span>
@@ -1160,9 +1169,14 @@
               <div class="tag-create-row" id="bulkEditTagCreateRow" style="display:none;">
                 <div style="display:flex;align-items:center;gap:8px;flex:1;">
                   <div class="tag-create-icon">
-                    <img class="ic-add-tag" src="../../icons/ic-add-tag-dark.png" width="22" height="22" alt="">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(30, 77, 255, 1)">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="16" stroke="white" stroke-width="2" />
+                      <line x1="8" y1="12" x2="16" y2="12" stroke="white" stroke-width="2" />
+                    </svg>
                   </div>
-                  <span class="tag-create-label">Create '<span id="bulkEditTagCreateName"></span>'</span>
+                  <span class="tag-create-label">Create <span style="color:rgba(30, 77, 255, 1)">'<span
+                        id="bulkEditTagCreateName"></span>'</span></span>
                   <div class="tag-color-list" id="bulkEditTagColorList">
                     <span class="tag-color-dot active" data-color="rgba(185,230,254,1)"
                       style="background:rgba(185,230,254,1);"></span>
